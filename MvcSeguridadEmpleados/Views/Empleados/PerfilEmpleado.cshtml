@@ -1,0 +1,17 @@
+﻿<h1>Perfil Empleado</h1>
+
+@if(Context.User.Identity.IsAuthenticated == true)
+{
+    <h2 style="color:red">Apellido: @Context.User.Identity.Name</h2>
+    <h2 style="color:blue">Oficio: @Context.User.FindFirst(ClaimTypes.Role).Value</h2>
+    <h2>Salario: @Context.User.FindFirst("Salario").Value</h2>
+
+    <ul class="list-group">
+        @foreach(var claim in this.Context.User.Claims)
+        {
+            <li class="list-group-item list-group-item-warning">
+                @claim.Type, @claim.Value
+            </li>
+        }
+    </ul>
+}
